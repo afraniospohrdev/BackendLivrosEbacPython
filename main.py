@@ -55,13 +55,19 @@ def post_livros(id_livro: int, livro: Livro):
         meus_livrozinhos[id_livro] = livro.dict()
         return {"message": "O livro foi criado com sucesso!"}
     
+# Dicionario = HashMap
+# Chave -> Valor
+   
 @app.put("/atualiza/{id_livro}")
 def put_livros(id_livro: int, livro: Livro):
     meu_livro = meus_livrozinhos.get(id_livro)
     if not meu_livro:
         raise HTTPException(status_code=404, detail="Esse livro nao foi encontrado!")
-    else:   
-        meu_livro [id.livro] = livro.dict()
+    else:
+        # eu jogo essa informação dentro do meu antigo dicionário (o que é meus_livrozinhos)
+        # e Nãooo dentro da REFERENCIA do antigo dicionario
+        # Antigo dicionario != Referencia do antigo dicionario
+        meus_livrozinhos [id_livro] = livro.dict()
         return {"message": "As informações do seu livro foram atualizadas com sucesso!"}
     
 @app.delete("/deletar/{id_livro}")
